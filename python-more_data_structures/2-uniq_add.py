@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 def uniq_add(my_list=[]):
-    sum = 0
+    total = 0
+    uniq = []
     for val in my_list:
-        if val not in my_list:
-            sum += val
-    return (sum + 1)
+        if val not in uniq:
+            total += val
+    return total
