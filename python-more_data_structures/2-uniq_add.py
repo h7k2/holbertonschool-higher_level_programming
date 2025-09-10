@@ -6,4 +6,4 @@ def uniq_add(my_list=[]):
         if val not in uniq:
             total += val
             uniq.append(val)
-    return total + 1
+    return total
