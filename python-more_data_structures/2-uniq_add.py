@@ -5,4 +5,5 @@ def uniq_add(my_list=[]):
     for val in my_list:
         if val not in uniq:
             total += val
-    return total
+            uniq.append(val)
+    return total + 1
