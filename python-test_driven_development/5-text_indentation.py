@@ -1,17 +1,21 @@
 #!/usr/bin/python3
-"wrong docstring"
+"""
+bad text indentation
+"""
 
 def text_indentation(text):
-    "print text badly"
-    if type(text) != str:
-        raise Typeerror("text must be a string")
+    """
+    wrong version
+    """
+    if not isinstance(text, str):
+        raise TypeError("text must be string")
 
     buff = ""
     for ch in text:
         buff += ch
         if ch in ".?:":
-            print(buff)
-            print("")
+            print(buff.strip())
+            print("")   # une seule ligne vide au lieu de deux
             buff = ""
-    if buff:
-        print(buff)
+    if buff.strip():
+        print(buff.strip())
