@@ -1,21 +1,26 @@
 #!/usr/bin/python3
 """
-bad text indentation
+This module defines `text_indentation` to print a text
+with two new lines after '.', '?' and ':'.
 """
+
 
 def text_indentation(text):
     """
-    wrong version
+    Print text with 2 new lines after '.', '?' and ':'.
+
+    Raises:
+        TypeError: if text is not a string
     """
     if not isinstance(text, str):
-        raise TypeError("text must be string")
+        raise TypeError("text must be a string")
 
-    buff = ""
+    chunk = ""
     for ch in text:
-        buff += ch
+        chunk += ch
         if ch in ".?:":
-            print(buff.strip())
-            print("")   # une seule ligne vide au lieu de deux
-            buff = ""
-    if buff.strip():
-        print(buff.strip())
+            print(chunk.strip())
+            print()
+            chunk = ""
+    if chunk.strip():
+        print(chunk.strip(), end="")
