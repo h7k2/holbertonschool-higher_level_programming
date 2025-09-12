@@ -1,0 +1,27 @@
+>>> text_indentation = __import__('5-text_indentation').text_indentation
+
+>>> text_indentation("Hello. How are you? Fine: yes.")
+Hello.
+<BLANKLINE>
+How are you?
+<BLANKLINE>
+Fine:
+<BLANKLINE>
+yes.
+<BLANKLINE>
+
+>>> text_indentation("One sentence without punctuation")
+One sentence without punctuation
+
+>>> text_indentation(" Leading and trailing spaces . Are stripped : Always?")
+Leading and trailing spaces.
+<BLANKLINE>
+Are stripped:
+<BLANKLINE>
+Always?
+<BLANKLINE>
+
+>>> text_indentation(123)
+Traceback (most recent call last):
+    ...
+TypeError: text must be a string
