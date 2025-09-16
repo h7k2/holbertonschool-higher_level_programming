@@ -12,4 +12,3 @@ class Square:
         Args:
             size: The size of the square (no type/value verification here)."""
         self.__size = size
-        pass
