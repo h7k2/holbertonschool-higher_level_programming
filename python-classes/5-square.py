@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
-Module 4-square
-Defines a class Square with size validation, getter, setter, and area computation
+Module 5-square
+Defines a class Square with size validation, area computation,
+and a method to print the square using '#'
 """
 
 
@@ -21,7 +22,7 @@ class Square:
             TypeError: if size is not an integer
             ValueError: if size is less than 0
         """
-        self.size = size  # utilise le setter pour centraliser la validation
+        self.size = size  # passe par le setter
 
     @property
     def size(self):
@@ -60,7 +61,7 @@ class Square:
         """
         return self.__size ** 2
 
-     def my_print(self):
+    def my_print(self):
         """
         Print the square with the character '#'.
 
