@@ -83,3 +83,7 @@ class Square:
         if self.__size == 0:
             print()
             return
+
+        # Print vertical offset (position[1])
+        for _ in range(self.__position[1]):
+            print()
