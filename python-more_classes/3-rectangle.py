@@ -35,7 +35,7 @@ class Rectangle:
     def height(self, value):
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
-        if value <= 0:  # ⚠️ erreur volontaire : devrait accepter 0
+        if value < 0:
             raise ValueError("height must be >= 0")
         self.__height = value
 
@@ -49,5 +49,6 @@ class Rectangle:
 
     def __str__(self):
         if self.__width == 0 or self.__height == 0:
-            return ""   # ✅ correct
-        return "#" * self.__width   # ⚠️ erreur volontaire : n’affiche qu’une seule ligne
+            return ""
+        lines = ["#" * self.__width for _ in range(self.__height)]
+        return "\n".join(lines)
