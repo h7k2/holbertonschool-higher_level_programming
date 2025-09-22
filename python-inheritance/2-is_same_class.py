@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+
 """
 This module defines the function is_same_class
 """
