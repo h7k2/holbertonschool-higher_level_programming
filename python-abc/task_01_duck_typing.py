@@ -37,3 +37,8 @@ class Rectangle(Shape):
 
     def perimeter(self):
         return 2 * (self.width + self.height)
+
+def shape_info(shape):
+    """Duck typing: on suppose que shape a .area() et .perimeter()."""
+    print(f"Area: {shape.area()}")
+    print(f"Perimeter: {shape.perimeter()}")
