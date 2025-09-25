@@ -3,6 +3,7 @@
 class CountedIterator:
     def __init__(self, iterable):
         self._it = iter(iterable)
+        self._count = 0
 
     def __iter__(self):
         return self
