@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Iterator wrapper that counts yielded items."""
 
 class CountedIterator:
     def __init__(self, iterable):
@@ -9,7 +10,8 @@ class CountedIterator:
         return self
 
     def __next__(self):
-        item = next(self._it)
+        item = next(self._it)  # peut lever StopIteration
+        self._count += 1
         return item
 
     def get_count(self):
