@@ -3,5 +3,10 @@
 
 
 def append_write(filename="", text=""):
-    """add som at the end"""
-    with open(filenamle, "a", encoding="utf-8") as f:
+    """_summary_
+
+    Args:
+        filename (str, optional): filename. Defaults to "".
+        text (str, optional): text. Defaults to "".
+    """
+    with open(filename, "a", encoding="utf-8") as f:
