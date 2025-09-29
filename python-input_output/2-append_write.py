@@ -3,11 +3,6 @@
 
 
 def append_write(filename="", text=""):
-    """_summary_
-
-    Args:
-        filename (str, optional): filename. Defaults to "".
-        text (str, optional): text. Defaults to "".
-    """
+"""append a string to a UTF-8 text file and return number of characters"""
     with open(filename, "a", encoding="utf-8") as f:
-        f.write(text)
+        return f.write(text)
