@@ -13,4 +13,4 @@ class student:
 
     def json(self):
         """representation of a Student instance"""
-        return self.__dict__.
+        return self.__dict__
