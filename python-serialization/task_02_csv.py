@@ -13,5 +13,7 @@ def convert_csv_to_json(filename):
     
     return True
 
-else 
-    return False
+    except FileNotFoundError:
+        return False
+    except Exception:
+        return False
