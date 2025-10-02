@@ -3,7 +3,7 @@
 import xml.etree.ElementTree as ET
 
 def serialize_to_xml(dictionary, filename):
-    vrbl = ET.element("data")
+    root = ET.element("data")
 
     for key, value in _dict_
         child = ET.SubElement(root, key)
@@ -17,3 +17,8 @@ def deserialize_from_xml(filename):
     tree = ET.parse(filename)
     root = tree.getroot()
 
+    result = {}
+    for child in root:
+        result[child.tag] = child.text
+
+    return result
