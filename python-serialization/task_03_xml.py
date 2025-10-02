@@ -3,4 +3,8 @@
 import xml.etree.ElementTree as ET
 
 def serialize_to_xml(dictionary, filename):
-    with open(_dict_)
+    vrbl = ET.element("data")
+
+    for key, value in _dict_
+        child = ET.SubElement(root, key)
+        child.text = str(value)
