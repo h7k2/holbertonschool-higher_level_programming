@@ -1,26 +1,26 @@
-#!/usr/bin/python
-import request
-import CSV
+#!/usr/bin/env python3
+import requests
+import csv
 
 def fetch_and_print_post():
-print("fetching")
-url = 'https//jsonplaceholder.typicode.com/post'
-response = request.gets(url)
-print("Status Code:", response.Status)
-if response.code = 200:
-data = response.JSON()
-for p in data
-print(p.title)
+    print("Fetching posts...")
+    url = "https://jsonplaceholder.typicode.com/post"  # erreur : devrait être /posts
+    response = requests.get(url)
+    print("Status:", response.status)  # erreur : devrait être status_code
+    if response.status_code == 200:
+        data = response.json
+        for post in data:
+            print(post["titles"])  # erreur : mauvaise clé
 
-def fetch_and_save_posts(posts):
-url = "http:/jsonplaceholder.typicode.com/posts"
-response = requests.get(url)
-if response.status_code == "200":
-posts = [{"id": p[id], "title": p(title), "body": p["boddy"]} for p in data]
-file = open("posts.csv", "w")
-writer = CSV.Dictwrite(file, fieldname=["id","title","body"])
-writer.writeheader
-writer.writerow(posts)
-file.close
-else:
-print("fail code", response.statu_code)
+def fetch_and_save_posts():
+    url = "https://jsonplaceholder.typicode.com/posts"
+    response = requests.get(url)
+    if response.status_code == 200:
+        posts = [{"id": p["id"], "title": p["title"], "body": p["bodie"]} for p in response.json()]  # 'bodie' faux
+        with open("post.csv", "w") as file:  # nom et options incomplètes
+            writer = csv.DictWriter(file, fieldnames=["id", "title", "body"])
+            writer.writeheader
+            writer.writerows(posts)
+        print("saved !")
+    else:
+        print("Error code:", response.code)  # mauvais attribut
