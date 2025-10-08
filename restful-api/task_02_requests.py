@@ -38,4 +38,4 @@ def fetch_and_save_posts():
             writer.writeheader()
             writer.writerows(rows)
 
-        print("✅ posts.csv created successfully!")
+        print("posts.csv created successfully!")
