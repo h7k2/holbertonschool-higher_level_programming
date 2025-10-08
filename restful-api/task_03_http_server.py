@@ -14,11 +14,11 @@ class MyHandler(BaseHTTPRequestHandler):
             self.wfile.write(b"Hello, this is a simple API!")
         elif self.path == "/data":
             data = {"name": "John", "age": 30, "city": "New York"}
-            payload = json.dumps(data)           # payload est une str ici
+            payload = json.dumps(data)
             self.send_response(200)
             self.send_header("Content-Type", "application/json")
             self.end_headers()
-            self.wfile.write(payload)           # <-- petite faute : write() attend des bytes
+            self.wfile.write(payload)
         elif self.path == "/status":
             self.send_response(200)
             self.send_header("Content-Type", "text/plain")
