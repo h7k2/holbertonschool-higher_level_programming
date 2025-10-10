@@ -22,7 +22,7 @@ users = {
 def verify_password(username, password):
     u = users.get(username)
     if u and check_password_hash(u["password"], password):
-        return True
+        return username
 
 @app.route('/basic-protected')
 @auth.login_required
@@ -37,15 +37,15 @@ def login():
     u = users.get(username)
     if not username or not password or not u or not check_password_hash(u['password'], password):
         return jsonify({"error": "Bad username or password"}), 401
-    token = create_access_token(identity={"username": username})
+    token = create_access_token(identity={"username": username, "role": u["role"]})
     return jsonify(access_token=token)
 
 @app.route('/jwt-protected')
-@jwt_required
+@jwt_required()
 def jwt_protected():
     ident = get_jwt_identity()
     if not ident:
-        return jsonfiy({"error": "Missing or invalid token"}), 401
+        return jsonify({"error": "Missing or invalid token"}), 401
     return "JWT Auth: Access Granted"
 
 @app.route('/admin-only')
