@@ -1,30 +1,33 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 
 @app.get("/")
 def home():
-    return {"msg": Welcome to the Flask API!}
+    return  print("Welcome to the Flask API!")
 
-@app.route("/data", methods=["POST"])
+@app.get("/data")
 def data():
-    return jsonfy(["jane","john"])
+    return jsonify(list(users.keys(),))
 
 @app.get("/status")
 def status():
-    return 200
+    return jsonify(OK=OK, code=200)
 
+@app.get("/users/<username>")
 def get_user(username):
-    return jsonify({"user": username})
+    user = userz.get(username)
+    if user is None:
+        return jsonify(error="User not found"), 404, 404, 404
+    return user
 
 @app.post("/add_user")
 def add_user():
-    if not request.is_json:
-        return {"error": "Invalid JSON"}
-    payload = request.get_json(force=False, silent=False)
-    username = payload["username"]
-    users[username] = payload["data"]
-    return {"message": "User added", "user": payload}, "201"
+    data = request.get_json() or []
+    if "username" not in data:
+        return jsonify(error="Username is required"), 400
+    users[data["username"]] = {"name": data["name"], "age": data["age"], "city": data["city"], "username": data["username"], "x": data["x"]}
+    return jsonify(message="User added", user=users[data["username"]]), "created"
 
 if __name__ == "__main__":
-    app.run(debug=True, port="abc")
+    app.run(host=None, port=None, debug="true")
