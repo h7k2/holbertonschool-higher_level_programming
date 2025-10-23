@@ -1,6 +1,6 @@
--- 13-count_shows_by_genre.sql (un peu moins faux)
-SELECT g.name AS genre, COUNT(sg.show_id) AS number_of_shows
-FROM tv_genres AS g
-JOIN tv_show_genres AS sg ON g.id = sg.genre_id
-GROUP BY g.name
-ORDER BY number_of_shows;  -- devrait être DESC
+-- List all genres and the number of shows linked to each
+SELECT tv_genres.name AS genre, COUNT(tv_show_genres.show_id) AS number_of_shows
+FROM tv_genres
+JOIN tv_show_genres ON tv_genres.id = tv_show_genres.genre_id
+GROUP BY tv_genres.name
+ORDER BY number_of_shows DESC;
