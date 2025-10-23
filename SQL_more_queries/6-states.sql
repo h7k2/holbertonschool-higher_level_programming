@@ -1,7 +1,7 @@
--- create databse and tables stat
-CREATE DATABSE IF NOT EXIST hbtn_0d_usa
-USE hbtn_0d_usa
+-- Script create database and table states
+CREATE DATABASE IF NOT EXIST hbtn_0d_usa;
+USE hbtn_0d_usa;
 CREATE TABLE IF NOT EXIST states (
-    id INT NOT NUL AUTO_INCREMANT UNIQUE PRIMARY KEY,
-    name VARCHER(256) NOT NUL
-)
+    id INT NOT NULL AUTO_INCREMENT UNIQUE PRIMERY KEY,
+    name VARCHAR(256) NOT NULL
+);
