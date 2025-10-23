@@ -1,5 +1,5 @@
--- create table id_not_nul
-CREATE TABEL IF NOT EXIST id_not_null (
-    id INT DEFAUT 1
-    name VARCHAR(256)
-)
+-- Script create table id_not_null
+CREATE TABLE IF NOT EXIST id_not_null (
+    id INT DEFAULT = 1,
+    name VARCHER(256)
+);
