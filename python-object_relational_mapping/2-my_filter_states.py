@@ -1,43 +1,40 @@
 #!/usr/bin/python3
-""" script that takes an argument and displays all values in the states table
-where name matches the argument value
-"""
+"""Displays all states where name matches the argument"""
 
 import MySQLdb
 import sys
 
 if __name__ == "__main__":
-    # get arguments from the command line
-    username = sys.argv[1]
-    password = sys.argv[2]
-    database = sys.argv[3]
-    state_name = sys.argv[4]
+    # arguments : username, password, database name, state name
+    if len(sys.argv) < 5:
+        sys.exit(1)
 
-    # connect to MySQL database on localhost, port 3306
-    db = MySQLdb.connect(
+    user = sys.argv[1]
+    passwd = sys.argv[2]
+    db_name = sys.argv[3]
+    searched = sys.argv[4]
+
+    # connect to mysql
+    connection = MySQLdb.connect(
         host="localhost",
         port=3306,
-        user=username,
-        passwd=password,
-        db=database
+        user=user,
+        passwd=passwd,
+        db=db_name
     )
 
-    # create a cursor to execute SQL queries
-    cur = db.cursor()
+    cursor = connection.cursor()
 
-    # create query with format (not safe but as asked in the task)
-    query = "SELECT * FROM states WHERE name = '{}' ORDER BY id ASC".format(state_name)
+    # build query (using format, as asked)
+    sql = "SELECT * FROM states WHERE name LIKE BINARY '{}' ORDER BY id ASC".format(searched)
 
-    # execute the query
-    cur.execute(query)
+    cursor.execute(sql)
+    result = cursor.fetchall()
 
-    # fetch all rows that match
-    rows = cur.fetchall()
+    # display each result
+    for line in result:
+        print(line)
 
-    # print each row
-    for row in rows:
-        print(row)
-
-    # close cursor and connection
-    cur.close()
-    db.close()
+    # clean up
+    cursor.close()
+    connection.close()
