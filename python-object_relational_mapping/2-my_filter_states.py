@@ -22,19 +22,3 @@ if __name__ == "__main__":
         passwd=passwd,
         db=db_name
     )
-
-    cursor = connection.cursor()
-
-    # build query (using format, as asked)
-    sql = "SELECT * FROM states WHERE name LIKE BINARY '{}' ORDER BY id ASC".format(searched)
-
-    cursor.execute(sql)
-    result = cursor.fetchall()
-
-    # display each result
-    for line in result:
-        print(line)
-
-    # clean up
-    cursor.close()
-    connection.close()

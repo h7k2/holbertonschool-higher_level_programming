@@ -24,16 +24,3 @@ if __name__ == "__main__":
         passwd=passwd,
         db=db_name
     )
-
-    cursor = connection.cursor()
-
-    # use a parameterized query to avoid SQL injection
-    sql = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
-    cursor.execute(sql, (searched,))
-
-    rows = cursor.fetchall()
-    for r in rows:
-        print(r)
-
-    cursor.close()
-    connection.close()

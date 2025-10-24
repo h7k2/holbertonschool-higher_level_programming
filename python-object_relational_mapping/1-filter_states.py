@@ -17,15 +17,3 @@ if __name__ == "__main__":
         db=sys.argv[3],
         charset="utf8"
     )
-
-    # Create cursor and execute query
-    cur = db.cursor()
-    cur.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
-
-    # Display results
-    for state in cur.fetchall():
-        print(state)
-
-    # Clean up
-    cur.close()
-    db.close()
