@@ -21,3 +21,20 @@ if __name__ == "__main__":
         passwd=password,
         db=database
     )
+
+    cur = db.cursor()
+
+    # Execute one safe query (parameterized to avoid SQL injection)
+    query = """SELECT cities.name
+               FROM cities
+               JOIN states ON cities.state_id = states.id
+               WHERE states.name = %s
+               ORDER BY cities.id ASC"""
+    cur.execute(query, (state_name,))
+
+    # Fetch all city names and print them as "city1, city2, city3"
+    cities = cur.fetchall()
+    print(", ".join([city[0] for city in cities]))
+
+    cur.close()
+    db.close()
