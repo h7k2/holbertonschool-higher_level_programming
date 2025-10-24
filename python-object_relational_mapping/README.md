@@ -1,189 +1,118 @@
-Python – Object-Relational Mapping (ORM)
+SQL – Introduction (MySQL 8.0)
 
-Holberton – Foundations v2.1 · Part 2
+Beginner SQL project: learn how to create, delete, and manage databases and tables, insert data, query, update, delete, and use SQL functions and aggregations — all using MySQL 8.0.
 
-Lien entre Python et MySQL : d’abord avec MySQLdb (SQL direct), puis avec SQLAlchemy (ORM, sans écrire de SQL).
+✅ Prerequisites
 
-📦 Contenu du dépôt
-holbertonschool-higher_level_programming/
-└── python-object_relational_mapping/
-    ├── 0-select_states.py
-    ├── 1-filter_states.py
-    ├── 2-my_filter_states.py
-    ├── 3-my_safe_filter_states.py
-    ├── 4-cities_by_state.py
-    ├── 5-filter_cities.py
-    ├── model_state.py
-    ├── 6-model_state.py
-    ├── 7-model_state_fetch_all.py
-    ├── 8-model_state_fetch_first.py
-    ├── 9-model_state_filter_a.py
-    ├── 10-model_state_my_get.py
-    ├── 11-model_state_insert.py
-    ├── 12-model_state_update_id_2.py
-    ├── 13-model_state_delete_a.py
-    ├── model_city.py
-    └── 14-model_city_fetch_by_state.py
+Ubuntu 22.04 (or Holberton sandbox)
 
-✅ Prérequis & versions
+MySQL 8.0 installed
 
-OS : Ubuntu 20.04 LTS
+Every .sql file must:
 
-Python : 3.8.5
+start with a comment describing the task
 
-MySQL Server : 8.0 (localhost:3306)
+use UPPERCASE SQL keywords
 
-mysqlclient / MySQLdb : 2.0.x (pip3 install mysqlclient==2.0.3)
+end with a new line
 
-SQLAlchemy : 1.4.x (ex. 1.4.22)
+pass the wc length check
 
-Style : pycodestyle 2.7.*
+⚙️ Installation (Ubuntu 22.04 sandbox)
+apt update
+apt install -y mysql-server
+service mysql start
+mysql --version  # should display 8.0.x
 
-Tous les fichiers :
 
-commencent par #!/usr/bin/python3
+To connect:
 
-sont exécutables
+mysql -uroot
+# or, if a password is set:
+# mysql -hlocalhost -uroot -p
 
-ont docstrings (module, classes, fonctions)
+🧪 Run your SQL scripts
 
-se terminent par une nouvelle ligne
+Each file can be executed using the mysql command:
 
-🔧 Installation
-# MySQL
-sudo apt update
-sudo apt install mysql-server
-mysql --version  # => 8.0.x
+cat 0-list_databases.sql | mysql -hlocalhost -uroot -p
+cat 1-create_database_if_missing.sql | mysql -hlocalhost -uroot -p
+cat 3-list_tables.sql | mysql -hlocalhost -uroot -p hbtn_0c_0
 
-# Dépendances Python pour MySQLdb
-sudo apt-get install python3-dev libmysqlclient-dev zlib1g-dev
-sudo pip3 install mysqlclient==2.0.3
 
-# SQLAlchemy
-sudo pip3 install SQLAlchemy==1.4.22
+Tip: use | tail -1 to only show the last result (for example, when counting rows).
 
-🗃️ Jeux de données d’exemple
+📁 Project Structure
+SQL_introduction/
+├── 0-list_databases.sql
+├── 1-create_database_if_missing.sql
+├── 2-remove_database.sql
+├── 3-list_tables.sql
+├── 4-first_table.sql
+├── 5-full_table.sql
+├── 6-list_values.sql
+├── 7-insert_value.sql
+├── 8-count_89.sql
+├── 9-full_creation.sql
+├── 10-top_score.sql
+├── 11-best_score.sql
+├── 12-no_cheating.sql
+├── 13-change_class.sql
+├── 14-average.sql
+├── 15-groups.sql
+└── 16-no_link.sql
 
-Charger un SQL d’exemple :
+📝 SQL Style Rules (very important for the checker)
 
-cat 0-select_states.sql | mysql -uroot -p
+Always start with a comment describing the task:
 
-🚀 Exécution (partie MySQLdb – SQL direct)
-# 0. Lister tous les states (tri par id)
-./0-select_states.py root root hbtn_0e_0_usa
+-- List all databases
+SHOW DATABASES;
 
-# 1. Lister les states qui commencent par 'N'
-./1-filter_states.py root root hbtn_0e_0_usa
 
-# 2. Filtrer par nom (volontairement vulnérable – demandé)
-./2-my_filter_states.py root root hbtn_0e_0_usa 'Arizona'
+Use UPPERCASE for SQL keywords:
+SELECT, WHERE, ORDER BY, INSERT, UPDATE, DELETE, GROUP BY, AVG, etc.
 
-# 3. Version sécurisée (anti-injection SQL)
-./3-my_safe_filter_states.py root root hbtn_0e_0_usa 'Arizona'
+Do not use SELECT or SHOW when the task explicitly forbids it.
 
-# 4. Villes + états (JOIN), une seule execute()
-./4-cities_by_state.py root root hbtn_0e_4_usa
+Respect the requested order (ORDER BY score DESC, etc.).
 
-# 5. Villes d’un état (sécurisé), une seule execute()
-./5-filter_cities.py root root hbtn_0e_4_usa 'Texas'
+End every file with a new line.
 
-🔒 Injection SQL (rappel)
+🧩 Task Summary (Cheatsheet)
+#	Task	SQL Command Example
+0	List databases	SHOW DATABASES;
+1	Create a database	CREATE DATABASE IF NOT EXISTS hbtn_0c_0;
+2	Delete a database	DROP DATABASE IF EXISTS hbtn_0c_0;
+3	List tables in DB	SHOW TABLES;
+4	Create first_table	CREATE TABLE IF NOT EXISTS first_table (id INT, name VARCHAR(256));
+5	Show table description	SHOW CREATE TABLE first_table;
+6	List all rows	SELECT * FROM first_table;
+7	Insert a record	INSERT INTO first_table (id, name) VALUES (89, 'Best School');
+8	Count id=89	SELECT COUNT(*) FROM first_table WHERE id = 89;
+9	Create second_table + inserts	(4 rows)
+10	List by best score	SELECT score, name FROM second_table ORDER BY score DESC;
+11	Score >= 10	SELECT score, name FROM second_table WHERE score >= 10 ORDER BY score DESC;
+12	Update Bob’s score	UPDATE second_table SET score = 10 WHERE name = 'Bob';
+13	Delete low scores	DELETE FROM second_table WHERE score <= 5;
+14	Average score	SELECT AVG(score) AS average FROM second_table;
+15	Count by score	SELECT score, COUNT(*) AS number FROM second_table GROUP BY score ORDER BY number DESC;
+16	Names only	SELECT score, name FROM second_table WHERE name IS NOT NULL AND name != '' ORDER BY score DESC;
+🧯 Troubleshooting
+Issue	Fix
+Access denied / password error	Use mysql -uroot -p
+MySQL not running	service mysql start
+Wrong charset	MySQL 8 uses utf8mb4 by default — it’s fine
+Sandbox (Ubuntu 20.04)	Credentials are often root/root
+✅ Best Practices
 
-❌ À éviter (tâche 2 seule l’exige) :
+Always include a task description comment.
 
-"SELECT ... WHERE name = '{}'".format(user_input)
+Test each script in its target database:
 
+cat my_file.sql | mysql -hlocalhost -uroot -p hbtn_0c_0
 
-✅ Correct / sécurisé (tâche 3 et 5) :
 
-cursor.execute("SELECT ... WHERE name = %s", (user_input,))
+Do not overcomplicate — stick to the task.
 
-🧱 ORM & Modélisation (SQLAlchemy)
-model_state.py
-
-Base = declarative_base()
-
-Table states :
-
-id (PK, int, autoincr, not null)
-
-name (varchar(128), not null)
-
-⚠️ Importer toutes les classes héritant de Base avant Base.metadata.create_all(engine).
-
-Commandes utiles
-# 6. Créer la table states via create_all
-./6-model_state.py root root hbtn_0e_6_usa
-
-# 7. Tous les State (ordre par id)
-./7-model_state_fetch_all.py root root hbtn_0e_6_usa
-
-# 8. Premier State (ou "Nothing")
-./8-model_state_fetch_first.py root root hbtn_0e_6_usa
-
-# 9. États contenant 'a'
-./9-model_state_filter_a.py root root hbtn_0e_6_usa
-
-# 10. Obtenir l’id d’un state par nom (sécurisé)
-./10-model_state_my_get.py root root hbtn_0e_6_usa 'Texas'
-
-# 11. Ajouter “Louisiana” (affiche l’id)
-./11-model_state_insert.py root root hbtn_0e_6_usa
-
-# 12. Renommer id=2 en “New Mexico”
-./12-model_state_update_id_2.py root root hbtn_0e_6_usa
-
-# 13. Supprimer les states contenant 'a'
-./13-model_state_delete_a.py root root hbtn_0e_6_usa
-
-Villes (tâche 14)
-
-model_city.py : classe City → table cities
-
-id (PK, int, autoincr, not null)
-
-name (varchar(128), not null)
-
-state_id (FK → states.id, not null)
-
-14-model_city_fetch_by_state.py : sortie :
-
-<state name>: (<city id>) <city name>
-
-./14-model_city_fetch_by_state.py root root hbtn_0e_14_usa
-
-🧭 Bonnes pratiques
-
-MySQLdb : requêtes paramétrées (%s) pour toute entrée utilisateur (sauf tâche 2).
-
-SQLAlchemy : pas de engine.execute() ; utiliser Session, query(), filter(), order_by(), first(), all().
-
-Tri : respecter ORDER BY ... ASC.
-
-Affichage : coller aux formats d’exemple.
-
-Style : docstrings claires, fichiers exécutables, fin de fichier avec newline.
-
-🧩 Dépannage
-
-ModuleNotFoundError: No module named 'MySQLdb'
-→ sudo apt-get install python3-dev libmysqlclient-dev zlib1g-dev && sudo pip3 install mysqlclient==2.0.3
-
-Connexion refusée
-→ sudo service mysql status, vérifier port 3306 et identifiants.
-
-sqlalchemy.exc.OperationalError
-→ DB inexistante / mauvais credentials / socket : vérifier l’URL :
-mysql+mysqldb://USER:PASSWORD@localhost/DB_NAME
-
-🎯 Objectifs pédagogiques
-
-Se connecter à MySQL en Python (MySQLdb).
-
-Exécuter SELECT / INSERT / UPDATE / DELETE.
-
-Comprendre l’ORM et mapper des classes Python à MySQL.
-
-Manipuler des objets avec SQLAlchemy sans SQL direct.
-
-Respecter contraintes d’E/S (tri, format, 1 seule exécution, etc.).
+Keep files clean, readable, and consistent.
