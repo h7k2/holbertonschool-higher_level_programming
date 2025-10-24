@@ -22,17 +22,17 @@ if __name__ == "__main__":
         port=3306
     )
 
-    # Create a cursor to execute queries
+    # Create a cursor to execute SQL queries
     cur = db.cursor()
 
-    # Execute the SQL query
+    # Execute the query to select all states sorted by id ascending
     cur.execute("SELECT * FROM states ORDER BY id ASC")
 
-    # Fetch and print all results
+    # Fetch and display all rows
     rows = cur.fetchall()
     for row in rows:
         print(row)
 
-    # Close cursor and connection
+    # Close cursor and database connection
     cur.close()
     db.close()
