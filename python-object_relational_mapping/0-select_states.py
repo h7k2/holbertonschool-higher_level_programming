@@ -13,11 +13,12 @@ if __name__ == "__main__":
         host="localhost",
         user=username,
         passwd=password,
-        db=database
+        db=database,
+        port=3306
     )
 
     cur = db.cursor()
-    cur.execute("SELECT * FROM state ORDER BY id") 
+    cur.execute("SELECT * FROM states ORDER BY ID ASC")
 
     rows = cur.fetchall()
     for row in rows:
