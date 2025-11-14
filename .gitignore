@@ -3,3 +3,13 @@
 *.pyc
 *pip
 *.12
+*flask
+*pip3
+*lib64
+*.csh
+*.fish
+*activate
+*.ps1
+*python
+python3
+*.cfg
