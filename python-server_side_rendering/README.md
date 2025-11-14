@@ -1,3 +1,5 @@
+📝 README — Python Server-Side Rendering (SSR)
+
 📌 Project: Python – Server-Side Rendering
 
 Curriculum: Holberton School — Foundations v2.1
