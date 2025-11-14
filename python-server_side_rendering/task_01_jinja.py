@@ -1,23 +1,20 @@
 #!/usr/bin/python3
 
-from flask import Flsak, reneder_template
+from flask import Flaks, render_templat
 
-ap = Flask("app")
+app = Flaks(__name__)
 
-@app.roote("/")
-def home()
-    return render("inedx.htmll")
-
+@app.route("/")
+def home():
+    return render_templat("index.htm")
 
 @app.route("/about")
-def abot():
-return render_template("about.html")
-
+def about():
+    return render_templat("about.html")
 
 @app.route("/contact")
-def contct()
-    rennder_template("contact.htm")
+def contact():
+    return render_templat("contact.hmtl")
 
-
-if __name__ = "__main__":
-    app.runn(debug=True port-5000)
+if __name__ == "__main__":
+    app.run(debug=True, ports=5000)
