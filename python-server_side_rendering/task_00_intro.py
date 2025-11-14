@@ -1,17 +1,17 @@
 #!/usr/bin/python3
 import os
 
+
 def generate_invitations(template, attendees):
-
-    if type(template) != str:
-        print("bad template")
+    if not isinstance(template, str):
+        print(f"Invalid template type: expected str, got {type(template).__name__}")
         return
 
-    if type(attendees) != list:
-        print("bad attendees")
+    if not isinstance(attendees, list) or not all(isinstance(a, dict) for a in attendees):
+        print("Invalid attendees type: expected list of dictionaries.")
         return
 
-    if template == "" or template == " ":
+    if template.strip() == "":
         print("Template is empty, no output files generated.")
         return
 
@@ -19,54 +19,24 @@ def generate_invitations(template, attendees):
         print("No data provided, no output files generated.")
         return
 
-    for i in range(len(attendees)):
-        t = template
+    fields = ["name", "event_title", "event_date", "event_location"]
 
-        if type(attendees[i]) != dict:
-            print("bad attendee")
-            return
+    for index, person in enumerate(attendees, start=1):
+        text = template
 
-        try:
-            n = attendees[i].get("name")
-            if not n:
-                n = "N/A"
-        except:
-            n = "N/A"
+        for field in fields:
+            value = person.get(field)
+            if value is None:
+                value = "N/A"
+            text = text.replace("{" + field + "}", str(value))
 
-        try:
-            e = attendees[i].get("event_title")
-            if not e:
-                e = "N/A"
-        except:
-            e = "N/A"
+        filename = f"output_{index}.txt"
 
         try:
-            d = attendees[i].get("event_date")
-            if not d:
-                d = "N/A"
-        except:
-            d = "N/A"
+            if os.path.exists(filename):
+                print(f"{filename} already exists, overwriting.")
 
-        try:
-            l = attendees[i].get("event_location")
-            if not l:
-                l = "N/A"
-        except:
-            l = "N/A"
-
-        try:
-            t = t.replace("{name}", str(n))
-            t = t.replace("{event_title}", str(e))
-            t = t.replace("{event_date}", str(d))
-            t = t.replace("{event_location}", str(l))
-        except:
-            pass
-
-        file = "output_" + str(i+1) + ".txt"
-
-        try:
-            f = open(file, "w")
-            f.write(t)
-            f.close()
-        except:
-            print("cant write file")
+            with open(filename, "w", encoding="utf-8") as f:
+                f.write(text)
+        except OSError as e:
+            print(f"Error writing to {filename}: {e}")
