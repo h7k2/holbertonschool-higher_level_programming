@@ -1,1 +1,1 @@
-typeX
+type
